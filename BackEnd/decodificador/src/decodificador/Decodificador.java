@@ -4,29 +4,21 @@ import java.util.Arrays;
 
 public class Decodificador {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
+
 		
-		int num1,num2;
-		String op;
+		String cadenaInicial = "3+4+3,4-7*1=";
+		String[] separado = cadenaInicial.split("(?<=[-+*/()])");		
 		
-		String cadena = "3+4+3,4-7*1=";
-	
-		int i;
-		char[] subCadenas = cadena.toCharArray();
-		String num = "";
-		
-		for( i=0; i< subCadenas.length; i++) {
-			if(Character.isDigit(subCadenas[i])) {
-				num += subCadenas[i];
-				System.out.println(Arrays.toString(subCadenas));
-			}else {
-				System.out.println(num+ " " + subCadenas[i]);
-				num="";
-			}
+		for(int i = 0; i < separado.length; i++){
+			separado[i] = separado[i].replace(",", ".");
+			Double operando = Double.parseDouble(separado[i].substring(0, separado[i].length()-1));
+			char operador = separado[i].charAt(separado[i].length()-1);
+			System.out.println(operando+ " " + operador);
+			
 		}
 		
-		//para mostrar el array literal
-		//System.out.println(Arrays.toString(partes));
+		
 		
 	}
 
