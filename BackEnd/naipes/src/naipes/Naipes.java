@@ -7,7 +7,7 @@ public class Naipes {
 	private String palo;
 	
 	//CONSTANTES
-	public static final String[] PALOS= {"ORO", "COPAS", "ESPADAS", "BASTOS", "DIAMANTES", "CORAZONES", "TREBOLES", "PICAS"};
+	public static final String[] PALOS= {"ORO", "COPAS", "ESPADAS", "BASTOS"};
 	public static final int LIMITE_CARTA_PALO=12;
 	
 	//CONSTRUCTOR
