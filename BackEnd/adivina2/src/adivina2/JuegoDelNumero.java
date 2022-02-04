@@ -58,7 +58,7 @@ public class JuegoDelNumero {
 			if(intento > 9) System.out.println("¡Has perdido!");
 			
 		} while (numeroUsuario != numeroRandom && intento <= 9);
-		
+		s.close();
 	}
 	
 	

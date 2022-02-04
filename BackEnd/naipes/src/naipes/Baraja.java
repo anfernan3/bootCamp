@@ -14,7 +14,6 @@ public class Baraja {
 		this.naipes = new Naipes[NUM_CARTAS];
 		this.posSiguienteCarta = 0;
 		crearBaraja();
-		barajar();
 
 	}
 

@@ -15,7 +15,8 @@ public class Decodificador {
 			Double operando = Double.parseDouble(separado[i].substring(0, separado[i].length()-1));
 			char operador = separado[i].charAt(separado[i].length()-1);
 			System.out.println(operando+ " " + operador);
-			
+			Calculadora c = new Calculadora();
+			c.calculo(operando, operador);
 		}
 		
 		
