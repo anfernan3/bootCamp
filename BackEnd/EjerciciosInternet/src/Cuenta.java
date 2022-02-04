@@ -15,15 +15,10 @@ public class Cuenta {
 	}
 
 	public void retirar(double cantidad) {
-		
-		if(cantidad <= 0) {
-			
-		}
-		if(cantidad > 0) {
+		if (this.cantidad - cantidad < 0) {
+			this.cantidad = 0;
+		} else {
 			setCantidad(getCantidad() - cantidad);
-		}
-		if(getCantidad() <= 0) {
-			setCantidad(0);
 		}
 
 	}
@@ -36,11 +31,16 @@ public class Cuenta {
 
 	public Cuenta(String titular, double cantidad) {
 		this.titular = titular;
-		this.cantidad = cantidad;
+		// Si la cantidad es menor que cero, lo ponemos a cero
+		if (cantidad < 0) {
+			this.cantidad = 0;
+		} else {
+			this.cantidad = cantidad;
+		}
 	}
 
 	public Cuenta(String titular) {
-		this.titular = titular;
+		this(titular, 0);
 	}
 
 //	GETTER , SETTER Y TO STRING

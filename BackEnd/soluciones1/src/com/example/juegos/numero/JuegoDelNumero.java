@@ -12,7 +12,7 @@ import com.example.juegos.JuegoException;
  * @version 1.0
  */
 public class JuegoDelNumero implements Juego<String> {
-	private int numeroBuscado;
+	int numeroBuscado;
     private int intentos;
     private boolean encontrado;
     private String resultado;
@@ -48,7 +48,7 @@ public class JuegoDelNumero implements Juego<String> {
         intentos += 1;
         if (numeroBuscado == numeroIntroducido) {
             encontrado = true;
-            resultado = "Bieeen!!! Acertaste.";
+            resultado = "Bien!!! Acertaste.";
         } else if (intentos >= 10) {
         	resultado = "Upsss! Se acabaron los intentos, el número era el " + numeroBuscado;
         } else if (numeroBuscado > numeroIntroducido) {
