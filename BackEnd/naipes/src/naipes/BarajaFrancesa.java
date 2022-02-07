@@ -1,76 +1,66 @@
 package naipes;
 
-public class Baraja {
+import java.util.ArrayList;
 
+public class BarajaFrancesa extends Naipes implements Juego {
+
+	private static final int NUM_CARTAS = 52;
 	private Naipes naipes[];
 	private int posSiguienteCarta;
+	private ArrayList<Carta> cartas;
 
-	// cartas
-	public static final int NUM_CARTAS = 40;
-
-//	METODOS
-
-	public Baraja() {
+	
+//	COSNTRUCTOR
+	public BarajaFrancesa() {
+		super();
 		this.naipes = new Naipes[NUM_CARTAS];
 		this.posSiguienteCarta = 0;
 		crearBaraja();
-
 	}
+	
 
-	// Creas la baraja ordenada
-	private void crearBaraja() {
-
-		String[] palos = Naipes.PALOS;
-
-//		recorro los palos
-		for (int i = 0; i < palos.length; i++) {
-
-//			recorro los numeros
-			for (int j = 0; j < Naipes.LIMITE_CARTA_PALO; j++) {
-
-				// las posiciones 8 y 9 del array son el 7 y 8.
-				if (!(j == 7 || j == 8)) {
-					if (j >= 9) {
-						// solo para la sota, caballo y rey
-						naipes[((i * (Naipes.LIMITE_CARTA_PALO - 2)) + (j - 2))] = new Naipes(j + 1, palos[i]);
-					} else {
-						// para los casos de 1 a 7
-						naipes[((i * (Naipes.LIMITE_CARTA_PALO - 2)) + j)] = new Naipes(j + 1, palos[i]);
-					}
-				}
-
-			}
+	public void mostrarBaraja() {		
+		for (int i=0; i<cartas.size(); i++) {
+			Carta carta = cartas.get(i);
+			System.out.println(carta.nombreCarta);
 		}
 	}
 
+	
+
+	@Override
+	public void crearBaraja() {
+		cartas = new ArrayList<Carta>();
+		int[] numeros = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		String[] palos = { "PICAS", "CORAZONES", "DIAMANTES", "TREBOLES" };
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				cartas.add(new Carta(numeros[j], palos[i]));
+			}
+		}
+		System.out.println(cartas);
+	}
+
+	@Override
 	public void barajar() {
 		int posicionAleatoria = 0;
 		Naipes n;
 
-		// recorro las cartas
+//	RECOOREMOS LAS CARTAS
 		for (int i = 0; i < naipes.length; i++) {
 			posicionAleatoria = generaNumeroEnteroAleatorio(0, NUM_CARTAS - 1);
 			n = naipes[i];
 			naipes[i] = naipes[posicionAleatoria];
 			naipes[posicionAleatoria] = n;
 		}
-		// la posicion vuelve al inicio
+//	LA POSICION VUELVE AL INICIO
 		this.posSiguienteCarta = 0;
+		
 	}
 
-	private Naipes siguienteNaipe() {
-		Naipes n = null;
-
-		if (posSiguienteCarta == NUM_CARTAS) {
-			System.out.println("Ya no hay mas cartas, baraja de nuevo");
-		} else {
-			n = naipes[posSiguienteCarta++];
-		}
-		return n;
-	}
-
+	@Override
 	public Naipes[] repartir(int numNaipes) {
-
 		if (numNaipes > NUM_CARTAS) {
 			System.out.println(" No se puede dar mas cartas de las que hay");
 		} else if (cartasDisponibles() < numNaipes) {
@@ -89,12 +79,13 @@ public class Baraja {
 		return null;
 	}
 
+	@Override
 	public int cartasDisponibles() {
 		return NUM_CARTAS - posSiguienteCarta;
 	}
 
+	@Override
 	public void cartasMonton() {
-
 		if (cartasDisponibles() == NUM_CARTAS) {
 			System.out.println("No se ha sacado ninguna carta");
 		} else {
@@ -102,27 +93,31 @@ public class Baraja {
 				System.out.println(naipes[i]);
 			}
 		}
-
+		
 	}
 
-	public void mostrarBaraja() {
-
-		if (cartasDisponibles() == 0) {
-			System.out.println("No hay cartas que mostrar");
-		} else {
-			for (int i = posSiguienteCarta; i < naipes.length; i++) {
-				System.out.println(naipes[i]);
-			}
-		}
-	}
-
+	@Override
 	public void comparar() {
-
+		// TODO Auto-generated method stub
+		
 	}
-
+	
+//	GENERA UN NUMERO ALEATORIO
 	public static int generaNumeroEnteroAleatorio(int minimo, int maximo) {
 		int num = (int) (Math.random() * (minimo - (maximo + 1)) + (maximo + 1));
 		return num;
+	}
+
+	@Override
+	public Naipes siguienteNaipe() {
+		Naipes n = null;
+
+		if (posSiguienteCarta == NUM_CARTAS) {
+			System.out.println("Ya no hay mas cartas, baraja de nuevo");
+		} else {
+			n = naipes[posSiguienteCarta++];
+		}
+		return n;
 	}
 
 }
