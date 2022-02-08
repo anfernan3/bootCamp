@@ -1,8 +1,8 @@
 package naipes;
 
-public class BarajaEspañola extends Naipes {
+public class BarajaEspañola extends Cartas {
 
-	private Naipes naipes[];
+	private Cartas naipes[];
 	private int posSiguienteCarta;
 
 	public static final String[] PALOS = { "ORO", "COPAS", "ESPADAS", "BASTOS" };
@@ -15,7 +15,7 @@ public class BarajaEspañola extends Naipes {
 
 	public BarajaEspañola() {
 		super();
-		this.naipes = new Naipes[NUM_CARTAS];
+		this.naipes = new Cartas[NUM_CARTAS];
 		this.posSiguienteCarta = 0;
 		crearBaraja();
 
@@ -33,9 +33,9 @@ public class BarajaEspañola extends Naipes {
 			for (int j = 0; j < LIMITE_CARTA_PALO; j++) {
 				if (!(j == 7 || j == 8)) {
 					if (j >= 9) {
-						naipes[((i * (LIMITE_CARTA_PALO - 2)) + (j - 2))] = new Naipes(j + 1, palos[i]);
+						naipes[((i * (LIMITE_CARTA_PALO - 2)) + (j - 2))] = new Cartas(j + 1, palos[i]);
 					} else {
-						naipes[((i * (LIMITE_CARTA_PALO - 2)) + j)] = new Naipes(j + 1, palos[i]);
+						naipes[((i * (LIMITE_CARTA_PALO - 2)) + j)] = new Cartas(j + 1, palos[i]);
 					}
 				}
 
@@ -46,7 +46,7 @@ public class BarajaEspañola extends Naipes {
 //	BARAJAMOS LAS CARTAS
 	public void barajar() {
 		int posicionAleatoria = 0;
-		Naipes n;
+		Cartas n;
 
 //	RECOOREMOS LAS CARTAS
 		for (int i = 0; i < naipes.length; i++) {
@@ -59,8 +59,8 @@ public class BarajaEspañola extends Naipes {
 		this.posSiguienteCarta = 0;
 	}
 
-	private Naipes siguienteNaipe() {
-		Naipes n = null;
+	private Cartas siguienteNaipe() {
+		Cartas n = null;
 
 		if (posSiguienteCarta == NUM_CARTAS) {
 			System.out.println("Ya no hay mas cartas, baraja de nuevo");
@@ -71,7 +71,7 @@ public class BarajaEspañola extends Naipes {
 	}
 
 //	REPARTIMOS UN NUMERO CONCRETO DE CARTAS
-	public Naipes[] repartir(int numNaipes) {
+	public Cartas[] repartir(int numNaipes) {
 
 		if (numNaipes > NUM_CARTAS) {
 			System.out.println(" No se puede dar mas cartas de las que hay");
@@ -79,7 +79,7 @@ public class BarajaEspañola extends Naipes {
 			System.out.println("No hay sufucientes cartas que mostrar");
 		} else {
 
-			Naipes[] naipesDar = new Naipes[numNaipes];
+			Cartas[] naipesDar = new Cartas[numNaipes];
 
 			// recorro el array para rellenarlo
 			for (int i = 0; i < naipesDar.length; i++) {

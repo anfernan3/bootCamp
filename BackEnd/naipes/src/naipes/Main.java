@@ -69,7 +69,7 @@ public class Main {
 			}
 			case 2: {
 	
-	//				CREAMOS LA BARAJA FRANCESA
+//				CREAMOS LA BARAJA FRANCESA
 				BarajaFrancesa bf = new BarajaFrancesa();
 	
 				System.out.println("--------------------------");
@@ -108,6 +108,8 @@ public class Main {
 						break;
 					}
 				} while (opcion != 4);
+				sn.close();
+				break;
 				
 			}
 		}

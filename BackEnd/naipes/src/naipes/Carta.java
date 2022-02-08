@@ -1,15 +1,14 @@
 package naipes;
 
-public class Carta {
+public abstract class Carta<T> {
 	
 	private int numero;
-	private String palo;
-	String nombreCarta;
+	private T palo;
+
 	
-	public Carta(int numero, String palo) {
+	public Carta(int numero, T palo) {
 		this.numero = numero;
 		this.palo=palo;
-		nombreCarta = numero + " " + palo;
 	}
 	
 
