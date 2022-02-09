@@ -12,6 +12,7 @@ public abstract class Pieza {
 	public Pieza(Color elColor) {
 		super();
 		this.elColor = elColor;
+		
 	}
 	
 //	GETTER Y SETTER
@@ -31,6 +32,10 @@ public abstract class Pieza {
 	protected abstract boolean esValido(Movimiento movimiento, Tablero tablero);
 	
 	public void mover(Movimiento movimiento, Tablero tablero) {
-		
+		if(movimiento.getPosIni()==movimiento.getPosFin()) {
+			
+		}else {
+			tablero.mover(movimiento);
+		}
 	}
 }

@@ -13,9 +13,19 @@ public class Torre extends Pieza{
 
 	@Override
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		// TODO Auto-generated method stub
+		if (movimiento.eshorizontal() || movimiento.esVertical()) {
+			return true;
+		}
 		return false;
 	}
+
+	@Override
+	public void mover(Movimiento movimiento, Tablero tablero) {
+		// TODO Auto-generated method stub
+		super.mover(movimiento, tablero);
+	}
+	
+	
 
 
 	

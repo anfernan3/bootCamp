@@ -11,6 +11,7 @@ public class Peon extends main.Pieza {
 
 	public Peon(Color elColor) {
 		super(elColor);
+		
 	}
 
 	public Event promocion(Object obj, PromocionEventArgs promocionEventArgs) {

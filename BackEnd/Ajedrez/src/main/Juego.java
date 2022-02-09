@@ -39,7 +39,7 @@ public class Juego  extends Tablero{
 		
 	}
 	
-	private void mover(Movimiento movimiento) {
+	public void mover(Movimiento movimiento) {
 		
 	}
 	
