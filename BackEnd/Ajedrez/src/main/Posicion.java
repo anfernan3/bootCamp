@@ -22,10 +22,12 @@ public class Posicion {
 
 	public Posicion(char laFila, char laColumna) {
 		super();
-		if (Character.getNumericValue(laColumna) >= 1 && Character.getNumericValue(laColumna) <= 8) {
+		if (Character.getNumericValue(laColumna) >= 65 && Character.getNumericValue(laColumna) <= 72) {
+			laColumna=(char) (Character.getNumericValue(laColumna)-laColumna+1);
 			this.laColumna = laColumna;
 		}
 		if (Character.getNumericValue(laFila) >= 1 && Character.getNumericValue(laFila) <= 8) {
+			laFila=(char) (Character.getNumericValue(laFila)-laFila+1);
 			this.laFila = laFila;
 		}
 

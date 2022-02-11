@@ -1,5 +1,12 @@
 package com.example;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,26 +19,34 @@ public class Principal {
 
 	public static void main(String[] args) {
 		Principal app = new Principal();
-		app.run();
-		
-		// app.juego();
-		// app.juegoConClase();
 
-//		decode("3+4+3,4-7*1=");
 		try {
-			//calcula("2+2-2+7*5+162/15=");
-			calculaList("3+4+3,4-7*1=");
-			//calculaList("25+43-37*88/9,9=");
-		} catch (CalculadoraException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			app.procesar();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 		}
+//		app.run();
+//
+//		// app.juego();
+//		// app.juegoConClase();
+//
+////		decode("3+4+3,4-7*1=");
+//		try {
+//			// calcula("2+2-2+7*5+162/15=");
+//			calculaList("3+4+3,4-7*1=");
+//			// calculaList("25+43-37*88/9,9=");
+//		} catch (CalculadoraException e) {
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+
 	}
 
 	public void run() {
-		
+
 	}
+
 	public void juego() {
 		@SuppressWarnings("resource")
 		Scanner teclado = new Scanner(System.in);
@@ -76,10 +91,10 @@ public class Principal {
 			for (int intentos = 1; intentos <= 10; intentos++) {
 				System.out.print("Dame tu número del 1 al 100 (" + (juego.getJugada() + 1) + " de 10): ");
 //				try {
-					juego.jugada(teclado.nextLine());
-					System.out.println(juego.getResultado());
-					if (juego.getFinalizado())
-						break;
+				juego.jugada(teclado.nextLine());
+				System.out.println(juego.getResultado());
+				if (juego.getFinalizado())
+					break;
 //				} catch (JuegoException e) {
 //					if (e.getCause() instanceof NumberFormatException)
 //						System.out.println(e.getMessage());
@@ -95,7 +110,7 @@ public class Principal {
 	}
 
 	public static void decode(String expresion) {
-		if(expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
+		if (expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
 			throw new java.lang.IllegalArgumentException("No es una expresión valida");
 		String operando = "";
 		for (int i = 0; i < expresion.length(); i++) {
@@ -123,8 +138,80 @@ public class Principal {
 		}
 	}
 
+	public void procesar() throws FileNotFoundException {
+
+		File archivo = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+
+		try {
+//			ABRIMOS EL ARCHIVO
+			archivo = new File("C:\\REPOSITORIO GIT\\BackEnd\\soluciones1\\src\\com\\example\\eje1.txt");
+			fr = new FileReader(archivo);
+			br = new BufferedReader(fr);
+
+			String linea;
+
+			while ((linea = br.readLine()) != null) {
+				calcula(linea);
+				try {
+					fichero = new FileWriter("C:\\REPOSITORIO GIT\\BackEnd\\soluciones1\\src\\com\\example\\SalidaEje1.txt");
+					pw = new PrintWriter(fichero);
+					pw.write(calcula(linea));
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (null != fichero)
+							fichero.close();
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fr) {
+					fr.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		
+
+	}
+
+	public void escribir() throws IOException {
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+
+		try {
+			fichero = new FileWriter("C:\\REPOSITORIO GIT\\BackEnd\\soluciones1\\src\\com\\example\\SalidaEje1.txt");
+			pw = new PrintWriter(fichero);
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fichero)
+					fichero.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+	}
+
 	public static double calcula(String expresion) throws CalculadoraException, Exception {
-		if(expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
+		if (expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
 			throw new java.lang.IllegalArgumentException("No es una expresión valida");
 		String operando = "";
 		Calculadora calculadora = new Calculadora();
@@ -157,7 +244,7 @@ public class Principal {
 	}
 
 	public static List<Calculadora.Operacion> decodeToList(String expresion) {
-		if(expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
+		if (expresion == null || "".equals(expresion) || !Character.isDigit(expresion.charAt(0)))
 			throw new java.lang.IllegalArgumentException("No es una expresión valida");
 		List<Calculadora.Operacion> resulatado = new ArrayList<>();
 		String operando = "";
@@ -185,8 +272,9 @@ public class Principal {
 			}
 		}
 		return resulatado;
-		
+
 	}
+
 	public static void calculaList(String expresion) throws CalculadoraException, Exception {
 		try {
 			var operaciones = decodeToList(expresion);

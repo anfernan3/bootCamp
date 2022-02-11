@@ -2,51 +2,67 @@ package main;
 
 public class Movimiento {
 
-	private Posicion posIni[][];
-	private Posicion posFin[][];
+//	ATRIBUTOS
 
+	private Posicion posIni;
+	private Posicion posFin;
+
+//	CONSTRUCTOR
 	public Movimiento(String movimiento) {
-		this.posIni = posIni;
-		this.posFin = posFin;
+		if (movimiento != null) {
+			this.posIni = posIni;
+			this.posFin = posFin;
+		}
 	}
 
-	public Posicion[][] getPosIni() {
+//	GETTER Y SETTER
+
+	public Posicion getPosIni() {
 		return posIni;
 	}
 
-	public void setPosIni(Posicion[][] posIni) {
+	public void setPosIni(Posicion posIni) {
 		this.posIni = posIni;
 	}
 
-	public Posicion[][] getPosFin() {
+	public Posicion getPosFin() {
 		return posFin;
 	}
 
-	public void setPosFin(Posicion[][] posFin) {
+	public void setPosFin(Posicion posFin) {
 		this.posFin = posFin;
 	}
 
+//	METODOS
+
 	public boolean esVertical() {
-		
+		if (posIni.getLaFila() == posFin.getLaFila())
+			return true;
 		return false;
 	}
 
 	public boolean eshorizontal() {
-		if (f1 == f2)
+		if (posIni.getLaColumna() == posFin.getLaColumna())
 			return true;
 		return false;
 	}
 
 	public int saltoVertical() {
-		int saltoVertical=Posicion.class.get)-Posicion.getLaFila();
+		int saltoVertical=0;
+		if (esVertical() && posIni.getLaFila() != posFin.getLaFila())
+			saltoVertical = posFin.getLaFila() + 1;
 		return saltoVertical;
 	}
 
 	public int saltoHorizontal() {
-		return 0;
+		int saltoHorizontal=0;
+		if (eshorizontal() && posIni.getLaColumna() != posFin.getLaColumna())
+			saltoHorizontal = posFin.getLaColumna() + 1;
+		return saltoHorizontal;
 	}
 
 	public int deltaFila() {
+		
 		return 0;
 
 	}
