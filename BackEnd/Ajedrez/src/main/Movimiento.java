@@ -62,14 +62,23 @@ public class Movimiento {
 	}
 
 	public int deltaFila() {
+//		mientras la fila inicial no sea igual a la final le sumas 1
 		
-		return 0;
-
+		while(posIni.getLaFila() != posFin.getLaFila()) {
+			int posicion=posIni.getLaFila();
+			return posicion+1;
+		}
+		return -1;
+		
 	}
 
 	public int deltaColumna() {
-		return 0;
-
+//		si no cambia la fila a la columna tienes que sumar 1
+		while(posIni.getLaColumna() != posFin.getLaColumna()) {
+			int posicion=posIni.getLaColumna();
+			return posicion+1;
+		}
+		return -1;
 	}
 
 }
