@@ -1,0 +1,128 @@
+- Obtener todos los actores de nombre ‘NICK’.
+
+SELECT * 
+FROM actor 
+WHERE first_name LIKE 'nick'
+
+- Obtener una lista con todos los distritos distintos (district en address).
+
+SELECT district 
+FROM address
+
+- Obtener las películas sobre agentes secretos (description contiene ‘Secret Agent’).
+
+SELECT * 
+FROM film 
+WHERE description LIKE '%Secret Agent%'
+
+- Mostrar la lista de las películas mas caras (coste por minuto)
+
+SELECT *
+FROM film
+ORDER BY rental_rate/LENGTH desc
+
+- Obtener los códigos y medias de gasto de los clientes que han gastado mas de 100 en menos de 25 operaciones.
+
+SELECT customer_id 'codigo', sum(p.amount) 'media de gasto'
+FROM payment p
+GROUP BY p.customer_id
+HAVING COUNT(p.customer_id) <25 AND sum(p.amount) >100 
+
+
+- Obtener los 5 nombres de actor más repetidos (aprox).
+
+SELECT COUNT(first_name), first_name 
+FROM actor 
+GROUP BY first_name 
+ORDER BY COUNT(first_name) 
+DESC 
+LIMIT 5
+
+- Para felicitar el año nuevo chino se necesita el listado con los datos postales de los clientes residentes en China y Taiwan
+
+SELECT CONCAT(first_name," ",last_name) 'nombre', a.address, a.district, a.postal_code, co.country
+FROM (((customer cu INNER JOIN address a ON cu.address_id = a.address_id)
+INNER JOIN city c ON a.city_id = c.city_id)
+INNER JOIN country co ON c.country_id = co.country_id)
+WHERE co.country LIKE 'china' OR co.country LIKE 'taiwan'
+
+- Mostrar los datos de las tiendas, conocidas por la ciudad y país donde están ubicadas, 
+indicando el nombre del gerente, el numero de películas en inventario, el numero de títulos diferentes 
+y el número de clientes atendidos.
+
+SELECT s.store_id, CONCAT(st.first_name, " ",st.last_name) 'nombre gerente', 
+
+(SELECT count(i.film_id)
+FROM inventory i
+WHERE i.store_id=s.store_id
+GROUP BY i.store_id) AS 'peliculas en inventario',
+
+(SELECT count(distinct i.film_id)
+FROM inventory i
+WHERE i.store_id=s.store_id
+GROUP BY i.store_id) AS 'titulos distintos',  
+
+(SELECT count(DISTINCT r.customer_id )
+FROM rental r INNER JOIN  inventory i ON r.inventory_id=i.inventory_id
+WHERE i.store_id=s.store_id) AS ClientesAtendidos, 
+
+a.address, c.city, co.country
+FROM ((((store s
+INNER JOIN address a ON a.address_id = s.address_id) 
+INNER JOIN staff st ON st.staff_id = s.manager_staff_id)
+INNER JOIN city c ON a.city_id = c.city_id)
+INNER JOIN country co ON c.country_id = co.country_id)
+
+Obtener el listado detallado de alquileres indicando el identificador de alquiler, el titulo alquilado, las fechas de alquiler, devolución y tiempo transcurrido, nombres del cliente (nombre con apellidos), empleado (nombre con apellidos) y tienda (ciudad, país).
+
+SELECT r.rental_id AS 'id alquiler', r.rental_date AS 'Fecha Alquiler', r.return_date AS 'Fecha devolucion', DATEDIFF(r.return_date,r.rental_date) AS 'tiempo trascurrido en dias' ,CONCAT(cu.first_name," ",cu.last_name) AS 'Nombre Cliente', CONCAT(st.first_name," ",st.last_name) AS 'Nombre empleado', s.store_id, c.city AS 'ciudad tienda' , co.country AS 'pais tienda'
+FROM rental r, customer cu, staff st, store s, city c, country co, address a
+WHERE 
+cu.customer_id=r.customer_id 
+AND 
+st.staff_id=r.staff_id 
+AND 
+s.store_id=st.store_id 
+AND 
+c.country_id=co.country_id 
+AND 
+a.city_id=c.city_id 
+AND 
+c.country_id=co.country_id
+AND 
+s.address_id=a.address_id
+
+Generar la lista diaria de alquileres vencidos no devueltos para poder llamar a los clientes y pedirles que los devuelvan, para ello debe mostrar las fechas de alquiler y vencimiento, el teléfono y nombre del cliente, así como el titulo de la película, priorizando los que mas tiempo llevan vencidos.
+
+SELECT r.rental_id, r.rental_date, r.return_date AS 'No devueltos', CONCAT(cu.first_name," ", cu.last_name) AS 'nombre cliente', a.phone, f.title
+FROM rental r, customer cu, address a, film f, inventory i
+WHERE r.customer_id=cu.customer_id AND return_date is NULL AND cu.address_id=a.address_id AND f.film_id=i.film_id AND i.inventory_id=r.inventory_id
+ORDER BY r.rental_date
+
+Elaborar el ranking de los países que más alquilan las películas de GINA DEGENERES.
+
+SELECT co.country, COUNT(co.country) AS 'num de alquiler'
+FROM film_actor fa, film f, actor ac, country co, city c, address a, inventory i, rental r, customer cu
+WHERE 
+fa.actor_id=ac.actor_id
+AND
+f.film_id=fa.film_id
+AND
+f.film_id=i.film_id
+AND 
+i.inventory_id=r.inventory_id
+AND
+r.customer_id=cu.customer_id
+AND
+cu.address_id=a.address_id
+AND
+a.city_id=c.city_id
+AND
+c.city_id=co.country_id
+AND 
+ac.first_name LIKE 'gina' AND ac.last_name LIKE 'degeneres'
+GROUP BY co.country
+ORDER BY COUNT(co.country) desc
+
+
+
