@@ -10,7 +10,9 @@ public class Tablero extends Pieza {
 	
 	@Override
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		// TODO Auto-generated method stub
+		if(movimiento.getPosIni() != movimiento.getPosFin() && movimiento.esVertical() || movimiento.eshorizontal()) {
+			return true;
+		}
 		return false;
 	}
 	

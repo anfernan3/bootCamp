@@ -1,69 +1,49 @@
 package main;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class PosicionTest {
+class PosicionTest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
 	}
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+	
+	
+
+	@Test
+	void testPosicionIntInt() {
+		Posicion p1 = new Posicion(1, 2);
+		assertNotEquals(p1.getLaFila(), p1.getLaColumna());
 	}
 
 	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
+	void testPosicionCharChar() {
+		Posicion p1 = new Posicion('a', 'h');
+		assertNotEquals(p1.getLaFila(), p1.getLaColumna(), "posicion valida");
 	}
-
-	@Test
-	public void testPosicionIntInt() {
-		
-	}
-
-	@Test
-	public void testPosicionCharChar() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLaFila() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetLaFila() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLaColumna() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetLaColumna() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEqualsObject() {
-		fail("Not yet implemented");
+	
+	@Test	
+	void comprobarPosicionNoEsIgual() {
+		Posicion p1 = new Posicion(1, 9);
+		assertEquals(p1.getLaFila(), p1.getLaColumna());
 	}
 
 }
