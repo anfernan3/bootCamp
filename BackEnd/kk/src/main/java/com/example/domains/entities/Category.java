@@ -14,6 +14,17 @@ import java.util.List;
 @Table(name="category")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category implements Serializable {
+	public Category(int categoryId, String name) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
+	}
+
+	public Category(int categoryId) {
+		super();
+		this.categoryId = categoryId;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
