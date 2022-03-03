@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -40,6 +41,13 @@ public class Inventory implements Serializable {
 
 	public Inventory() {
 	}
+	
+	public Inventory(int inventoryId) {
+		super();
+		this.inventoryId = inventoryId;
+	}
+
+
 
 	public int getInventoryId() {
 		return this.inventoryId;
@@ -95,4 +103,30 @@ public class Inventory implements Serializable {
 		return rental;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(film, inventoryId, lastUpdate, rentals, store);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Inventory other = (Inventory) obj;
+		return Objects.equals(film, other.film) && inventoryId == other.inventoryId
+				&& Objects.equals(lastUpdate, other.lastUpdate) && Objects.equals(rentals, other.rentals)
+				&& Objects.equals(store, other.store);
+	}
+
+	@Override
+	public String toString() {
+		return "Inventory [inventoryId=" + inventoryId + ", lastUpdate=" + lastUpdate + ", film=" + film + ", store="
+				+ store + ", rentals=" + rentals + "]";
+	}
+
+	
 }

@@ -3,7 +3,9 @@ package com.example.domains.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -19,7 +21,7 @@ public class Staff implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="staff_id")
-	private byte staffId;
+	private int staffId;
 
 	private byte active;
 
@@ -65,12 +67,17 @@ public class Staff implements Serializable {
 
 	public Staff() {
 	}
+	
+	public Staff(int staffId) {
+		super();
+		this.staffId = staffId;
+	}
 
-	public byte getStaffId() {
+	public int getStaffId() {
 		return this.staffId;
 	}
 
-	public void setStaffId(byte staffId) {
+	public void setStaffId(int staffId) {
 		this.staffId = staffId;
 	}
 
@@ -219,5 +226,43 @@ public class Staff implements Serializable {
 
 		return store;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(picture);
+		result = prime * result + Objects.hash(active, address, email, firstName, lastName, lastUpdate, password,
+				payments, rentals, staffId, store, stores, username);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Staff other = (Staff) obj;
+		return active == other.active && Objects.equals(address, other.address) && Objects.equals(email, other.email)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(lastUpdate, other.lastUpdate) && Objects.equals(password, other.password)
+				&& Objects.equals(payments, other.payments) && Arrays.equals(picture, other.picture)
+				&& Objects.equals(rentals, other.rentals) && staffId == other.staffId
+				&& Objects.equals(store, other.store) && Objects.equals(stores, other.stores)
+				&& Objects.equals(username, other.username);
+	}
+
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", active=" + active + ", email=" + email + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", lastUpdate=" + lastUpdate + ", password=" + password + ", picture="
+				+ Arrays.toString(picture) + ", username=" + username + ", payments=" + payments + ", rentals="
+				+ rentals + ", address=" + address + ", store=" + store + ", stores=" + stores + "]";
+	}
+	
+	
 
 }

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -59,6 +60,13 @@ public class Customer implements Serializable {
 
 	public Customer() {
 	}
+	
+	public Customer(int customerId) {
+		super();
+		this.customerId = customerId;
+	}
+
+
 
 	public int getCustomerId() {
 		return this.customerId;
@@ -175,5 +183,37 @@ public class Customer implements Serializable {
 
 		return rental;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(active, address, createDate, customerId, email, firstName, lastName, lastUpdate, payments,
+				rentals, store);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		return active == other.active && Objects.equals(address, other.address)
+				&& Objects.equals(createDate, other.createDate) && customerId == other.customerId
+				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(lastUpdate, other.lastUpdate)
+				&& Objects.equals(payments, other.payments) && Objects.equals(rentals, other.rentals)
+				&& Objects.equals(store, other.store);
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", active=" + active + ", createDate=" + createDate + ", email="
+				+ email + ", firstName=" + firstName + ", lastName=" + lastName + ", lastUpdate=" + lastUpdate
+				+ ", address=" + address + ", store=" + store + ", payments=" + payments + ", rentals=" + rentals + "]";
+	}
+	
+	
 
 }

@@ -2,6 +2,9 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.example.domains.core.entities.EntityBase;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,7 +18,8 @@ import java.util.Objects;
 @Entity
 @Table(name="film")
 @NamedQuery(name="Film.findAll", query="SELECT f FROM Film f")
-public class Film implements Serializable {
+
+public class Film extends EntityBase<Film> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -76,6 +80,29 @@ public class Film implements Serializable {
 		super();
 		this.filmId = filmId;
 	}
+	
+	public Film(int filmId, String description, Timestamp lastUpdate, int length, String rating, short releaseYear,
+			byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, String title, Language language,
+			Language languageVO, List<FilmActor> filmActors, List<FilmCategory> filmCategories,
+			List<Inventory> inventories) {
+		super();
+		this.filmId = filmId;
+		this.description = description;
+		this.lastUpdate = lastUpdate;
+		this.length = length;
+		this.rating = rating;
+		this.releaseYear = releaseYear;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.replacementCost = replacementCost;
+		this.title = title;
+		this.language = language;
+		this.languageVO = languageVO;
+		this.filmActors = filmActors;
+		this.filmCategories = filmCategories;
+		this.inventories = inventories;
+	}
+
 
 	public int getFilmId() {
 		return this.filmId;
@@ -252,5 +279,16 @@ public class Film implements Serializable {
 			return false;
 		return filmId == ((Film) obj).filmId;
 	}
+
+	@Override
+	public String toString() {
+		return "Film [filmId=" + filmId + ", description=" + description + ", lastUpdate=" + lastUpdate + ", length="
+				+ length + ", rating=" + rating + ", releaseYear=" + releaseYear + ", rentalDuration=" + rentalDuration
+				+ ", rentalRate=" + rentalRate + ", replacementCost=" + replacementCost + ", title=" + title
+				+ ", language=" + language + ", languageVO=" + languageVO + ", filmActors=" + filmActors
+				+ ", filmCategories=" + filmCategories + ", inventories=" + inventories + "]";
+	}
+	
+	
 
 }

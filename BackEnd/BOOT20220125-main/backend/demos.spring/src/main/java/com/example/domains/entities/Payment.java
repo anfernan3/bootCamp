@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import java.sql.Timestamp;
 
 
@@ -48,6 +49,26 @@ public class Payment implements Serializable {
 
 	public Payment() {
 	}
+	
+	
+	public Payment(int paymentId) {
+		super();
+		this.paymentId = paymentId;
+	}
+
+
+	public Payment(int paymentId, BigDecimal amount, Timestamp lastUpdate, Date paymentDate, Customer customer,
+			Rental rental, Staff staff) {
+		super();
+		this.paymentId = paymentId;
+		this.amount = amount;
+		this.lastUpdate = lastUpdate;
+		this.paymentDate = paymentDate;
+		this.customer = customer;
+		this.rental = rental;
+		this.staff = staff;
+	}
+
 
 	public int getPaymentId() {
 		return this.paymentId;
@@ -104,5 +125,37 @@ public class Payment implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(amount, customer, lastUpdate, paymentDate, paymentId, rental, staff);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		return Objects.equals(amount, other.amount) && Objects.equals(customer, other.customer)
+				&& Objects.equals(lastUpdate, other.lastUpdate) && Objects.equals(paymentDate, other.paymentDate)
+				&& paymentId == other.paymentId && Objects.equals(rental, other.rental)
+				&& Objects.equals(staff, other.staff);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Payment [paymentId=" + paymentId + ", amount=" + amount + ", lastUpdate=" + lastUpdate
+				+ ", paymentDate=" + paymentDate + ", customer=" + customer + ", rental=" + rental + ", staff=" + staff
+				+ "]";
+	}
+	
+	
 
 }

@@ -1,10 +1,22 @@
 package com.example.domains.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
+import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -14,7 +26,7 @@ import java.util.List;
 @Entity
 @Table(name="rental")
 @NamedQuery(name="Rental.findAll", query="SELECT r FROM Rental r")
-public class Rental implements Serializable {
+public class Rental extends EntityBase<Rental> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,10 +35,14 @@ public class Rental implements Serializable {
 	private int rentalId;
 
 	@Column(name="last_update")
+	@NotNull
+	@PastOrPresent
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="rental_date")
+	@NotNull
 	private Date rentalDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -34,25 +50,70 @@ public class Rental implements Serializable {
 	private Date returnDate;
 
 	//bi-directional many-to-one association to Payment
-	@OneToMany(mappedBy="rental")
+	@OneToMany(mappedBy="rental", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Valid
+	@JsonIgnore
 	private List<Payment> payments;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
+	@Positive
+	@NotNull
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 
 	//bi-directional many-to-one association to Inventory
 	@ManyToOne
+	@Positive
+	@NotNull
 	@JoinColumn(name="inventory_id")
 	private Inventory inventory;
 
 	//bi-directional many-to-one association to Staff
 	@ManyToOne
+	@Positive
+	@NotNull
 	@JoinColumn(name="staff_id")
 	private Staff staff;
 
 	public Rental() {
+		super();
+		payments = new ArrayList<Payment>();
+	}
+	
+	public Rental(int rentalId) {
+		this();
+		this.rentalId = rentalId;
+	}
+
+	public Rental(int rentalId, @NotNull Date rentalDate, Date returnDate,
+			@Positive @NotNull Customer customer, @Positive @NotNull Inventory inventory,
+			@Positive @NotNull Staff staff) {
+		this();
+		this.rentalId = rentalId;	
+		this.rentalDate = rentalDate;
+		this.returnDate = returnDate;
+		this.customer = customer;
+		this.inventory = inventory;
+		this.staff = staff;
+	}
+	
+	
+
+
+	public Rental(int rentalId, @NotNull Date rentalDate, @Positive @NotNull Customer customer,
+			@Positive @NotNull Inventory inventory) {
+		super();
+		this.rentalId = rentalId;
+		this.rentalDate = rentalDate;
+		this.customer = customer;
+		this.inventory = inventory;
+	}
+
+	public Rental(int rentalId, @NotNull Date rentalDate) {
+		super();
+		this.rentalId = rentalId;
+		this.rentalDate = rentalDate;
 	}
 
 	public int getRentalId() {
@@ -132,5 +193,25 @@ public class Rental implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(customer, inventory, lastUpdate, payments, rentalDate, rentalId, returnDate, staff);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if(!(obj instanceof Rental))
+			return false;
+		Rental other = (Rental) obj;
+		return Objects.equals(customer, other.customer) && Objects.equals(inventory, other.inventory)
+				&& Objects.equals(lastUpdate, other.lastUpdate) && Objects.equals(payments, other.payments)
+				&& Objects.equals(rentalDate, other.rentalDate) && rentalId == other.rentalId
+				&& Objects.equals(returnDate, other.returnDate) && Objects.equals(staff, other.staff);
+	}
+	
+	
 
 }

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.example.exceptions.DuplicateKeyException;
-import com.example.exceptions.InvalidDataException;
-import com.example.exceptions.NotFoundException;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -46,31 +43,31 @@ public class ApiExceptionHandler {
 		}
 	}
 
-	@ExceptionHandler({ NotFoundException.class, EmptyResultDataAccessException.class })
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ResponseBody
-	public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception) {
-		return new ErrorMessage(exception.getMessage(), request.getRequestURI());
-	}
+//	@ExceptionHandler({ NotFoundException.class, EmptyResultDataAccessException.class })
+//	@ResponseStatus(HttpStatus.NOT_FOUND)
+//	@ResponseBody
+//	public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception) {
+//		return new ErrorMessage(exception.getMessage(), request.getRequestURI());
+//	}
 
-	@ExceptionHandler({ InvalidDataException.class, MethodArgumentNotValidException.class })
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ResponseBody
-	public ErrorMessage invalidData(Exception exception) {
-		return new ErrorMessage("Invalid data", exception.getMessage());
-	}
-
-	@ExceptionHandler({ DuplicateKeyException.class })
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ResponseBody
-	public ErrorMessage badRequest(Exception exception) {
-		return new ErrorMessage(exception.getMessage(), "");
-	}
-
-	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
-	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-	@ResponseBody
-	public ErrorMessage FormatoInvalido(Exception exception) {
-		return new ErrorMessage(exception.getMessage(), "");
-	}
+//	@ExceptionHandler({ InvalidDataException.class, MethodArgumentNotValidException.class })
+//	@ResponseStatus(HttpStatus.BAD_REQUEST)
+//	@ResponseBody
+//	public ErrorMessage invalidData(Exception exception) {
+//		return new ErrorMessage("Invalid data", exception.getMessage());
+//	}
+//
+//	@ExceptionHandler({ DuplicateKeyException.class })
+//	@ResponseStatus(HttpStatus.BAD_REQUEST)
+//	@ResponseBody
+//	public ErrorMessage badRequest(Exception exception) {
+//		return new ErrorMessage(exception.getMessage(), "");
+//	}
+//
+//	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
+//	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+//	@ResponseBody
+//	public ErrorMessage FormatoInvalido(Exception exception) {
+//		return new ErrorMessage(exception.getMessage(), "");
+//	}
 }

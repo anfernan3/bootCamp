@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -104,5 +105,32 @@ public class Language implements Serializable {
 
 		return filmsVO;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(films, filmsVO, languageId, lastUpdate, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Language other = (Language) obj;
+		return Objects.equals(films, other.films) && Objects.equals(filmsVO, other.filmsVO)
+				&& languageId == other.languageId && Objects.equals(lastUpdate, other.lastUpdate)
+				&& Objects.equals(name, other.name);
+	}
+
+	@Override
+	public String toString() {
+		return "Language [languageId=" + languageId + ", lastUpdate=" + lastUpdate + ", name=" + name + ", films="
+				+ films + ", filmsVO=" + filmsVO + "]";
+	}
+	
+	
 
 }
