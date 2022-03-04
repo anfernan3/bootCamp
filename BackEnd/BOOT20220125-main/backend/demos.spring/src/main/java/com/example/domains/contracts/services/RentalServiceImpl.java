@@ -21,7 +21,21 @@ public class RentalServiceImpl implements RentalService {
 	public RentalServiceImpl(RentalRepository dao) {
 		this.dao = dao;
 	}
-
+	
+	@Override
+	public List<Rental> getAll() {
+		return dao.findAll();
+	}
+	
+	@Override
+	public Iterable<Rental> getAll(Sort sort) {
+		return dao.findAll(sort);
+	}
+	@Override
+	public Page<Rental> getAll(Pageable pageable) {
+		return dao.findAll(pageable);
+	}
+	
 	@Override
 	public <T> List<T> getByProjection(Class<T> type) {
 		return dao.findByRentalIdIsNotNull(type);
@@ -38,28 +52,13 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public Iterable<Rental> getAll(Sort sort) {
-		return dao.findAll(sort);
-	}
-
-	@Override
-	public Page<Rental> getAll(Pageable pageable) {
-		return dao.findAll(pageable);
-	}
-
-	@Override
-	public List<Rental> getAll() {
-		return dao.findAll();
-	}
-
-	@Override
 	public Rental getOne(Integer id) throws NotFoundException {
 		var item = dao.findById(id);
-		if (item.isEmpty())
+		if(item.isEmpty())
 			throw new NotFoundException();
 		return item.get();
 	}
-
+	
 	@Override
 	public Rental add(Rental item) throws DuplicateKeyException, InvalidDataException {
 		if(item == null)
@@ -70,9 +69,8 @@ public class RentalServiceImpl implements RentalService {
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
-
 	@Override
-	public Rental change(Rental item) throws NotFoundException, InvalidDataException {
+	public Rental change(Rental item) throws NotFoundException, InvalidDataException  {
 		if(item == null)
 			throw new IllegalArgumentException();
 		if(dao.findById(item.getRentalId()).isEmpty())
@@ -81,19 +79,15 @@ public class RentalServiceImpl implements RentalService {
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
-
 	@Override
 	public void delete(Rental item) {
 		if(item == null)
 			throw new IllegalArgumentException();
 		deleteById(item.getRentalId());
-
+		
 	}
-
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
-
 	}
-
 }
