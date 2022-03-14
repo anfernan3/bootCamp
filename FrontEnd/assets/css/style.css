@@ -1,0 +1,413 @@
+
+ /* Extra small devices (phones, 600px and down) */
+ @media only screen and (max-width: 600px) {
+
+    /* CSS DEL MENU */
+
+    .navbar-brand{
+        color: #d9ecf2 !important;
+    }
+    .navbar-toggler{
+        background-color: #d9ecf2 !important;
+        color: #d9ecf2 !important;
+    }
+    .navbar-toggler-icon {
+        color: #1aa6b7 !important;
+    }
+    .nav-link{
+        color: #d9ecf2 !important;
+    }
+    .navbar{
+        background-color: #002d40 !important;
+    }
+    .btn-acceso{
+        background-color: #1aa6b7 !important;
+        width: 100% !important;
+        color: white !important;
+    }
+    .btn-acceso a{
+        color: white !important;
+    }
+    .btn-pedir{
+        background-color: #ff414d !important;
+        color: white !important;
+    }
+    .bi{
+        color:#1aa6b7 ;
+    }
+    .acceso{
+        width: fit-content !important;
+        align-content: space-around !important;
+    }
+    .acceso button{
+        margin: 5% !important;
+    }
+
+    /* CSS DEL PÁRRAFO DE BIENVENIDA */
+
+    .bienvenida{
+        text-align: center !important;
+    }
+    .itemIndex-promocion img{
+        width: 100%;
+    }
+
+    /* CSS DEL LOGIN */
+
+    .login{
+        margin: 5%;
+    }
+    .login form button{
+        margin: 2% !important;
+    }
+    .btn-link{
+        text-decoration: none !important;
+        list-style: none;
+        color: white !important;
+    }
+
+    /* CSS DE LAS TARJETAS DE LA CARTA */
+    .itemCarta{
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 2% !important;
+        align-items: center !important
+    }
+    .itemCarta-image img{
+        width: 100% !important;
+    }
+    .itemCarta-content{
+        margin: 2% !important;
+        text-align: left !important
+    }
+
+    /* CSS DEL REGISTRO */
+
+    .form-registro form div{
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 2% !important;
+    }
+    .form-registro form div button{
+        margin: 2% !important;
+        text-align: center !important;
+    }
+
+ }
+
+ /* Small devices (portrait tablets and large phones, 600px and up) */
+ @media only screen and (min-width: 600px) {
+
+        /* CSS DEL MENU */
+    .navbar-brand{
+        color: #d9ecf2 !important;
+    }
+    .navbar-toggler{
+        background-color: #d9ecf2 !important;
+        color: #d9ecf2 !important;
+    }
+    .navbar-toggler-icon {
+        color: #1aa6b7 !important;
+    }
+    .nav-link{
+        color: #d9ecf2 !important;
+    }
+    .navbar{
+        background-color: #002d40 !important;
+    }
+    .btn-acceso{
+        background-color: #1aa6b7 !important;
+        width: 100% !important;
+        color: white !important;
+    }
+    .btn-acceso a{
+        color: white !important;
+    }
+    .btn-pedir{
+        background-color: #ff414d !important;
+        color: white !important;
+    }
+    .bi{
+        color:#1aa6b7 ;
+    }
+    .acceso{
+        width: fit-content !important;
+        align-content: space-around !important;
+    }
+    .acceso button{
+        margin: 5% !important;
+    }
+
+    /* CSS DEL PÁRRAFO DE BIENVENIDA */
+
+    .bienvenida{
+        text-align: center !important;
+    }
+    .itemIndex-promocion img{
+        width: 100%;
+    }
+
+    /* CSS DE LAS TARJETAS DE LA CARTA */
+    .itemCarta{
+        display: flex !important;
+        flex-direction: row !important;
+        margin: 2% !important;
+        align-items: center !important
+    }
+    .itemCarta-image img{
+        width: 100% !important;
+    }
+    .itemCarta-content{
+        margin: 2% !important;
+        text-align: left !important
+    }
+
+    /* CSS DEL LOGIN */
+
+    .login{
+        margin-top: 2%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .login form button{
+        margin: 2% !important;
+    }
+    .btn-link{
+        text-decoration: none !important;
+        list-style: none;
+        color: white !important;
+    }
+
+    /* CSS DEL REGISTRO */
+
+    .form-registro{
+        width: 75%;
+        margin-top: 2%;
+        margin-left: 12%;
+        margin-right: 12%;
+    }
+    .form-registro form div{
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 2% !important;
+    }
+    .form-registro form div button{
+        margin: 2% !important;
+        text-align: center !important;
+    }
+ }
+ 
+ /* Medium devices (landscape tablets, 768px and up) */
+ @media only screen and (min-width: 768px) {
+        /* CSS DEL MENU */
+        .navbar-brand{
+            color: #d9ecf2 !important;
+        }
+        .navbar-toggler{
+            background-color: #d9ecf2 !important;
+            color: #d9ecf2 !important;
+        }
+        .navbar-toggler-icon {
+            color: #1aa6b7 !important;
+        }
+        .nav-link{
+            color: #d9ecf2 !important;
+        }
+        .navbar{
+            background-color: #002d40 !important;
+        }
+        .btn-acceso{
+            background-color: #1aa6b7 !important;
+            width: 100% !important;
+            color: white !important;
+        }
+        .btn-acceso a{
+            color: white !important;
+        }
+        .btn-pedir{
+            background-color: #ff414d !important;
+            color: white !important;
+        }
+        .bi{
+            color:#1aa6b7 ;
+        }
+        .acceso{
+            width: fit-content !important;
+            align-content: space-around !important;
+        }
+        .acceso button{
+            margin: 5% !important;
+        }
+    
+        /* CSS DEL PÁRRAFO DE BIENVENIDA */
+    
+        .bienvenida{
+            text-align: center !important;
+        }
+        .itemIndex-promocion img{
+            width: 100%;
+        }
+    
+        /* CSS DE LAS TARJETAS DE LA CARTA */
+
+        .carta{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        
+        }
+        .itemCarta{
+            display: flex !important;
+            flex-direction:column !important;
+            width: 40%;
+            margin-left: 5% !important;
+            margin-right: 5% !important;
+ 
+        }
+        .itemCarta-image img{
+            display: block !important;
+            width: 75% !important;
+            margin: auto !important;
+        }
+        .itemCarta-content{
+            text-align: left !important
+        }
+    
+        /* CSS DEL LOGIN */
+    
+        .login{
+            margin-top: 2%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .login form button{
+            margin: 2% !important;
+        }
+        .btn-link{
+            text-decoration: none !important;
+            list-style: none;
+            color: white !important;
+        }
+    
+        /* CSS DEL REGISTRO */
+    
+        .form-registro{
+            width: 75%;
+            margin-top: 2%;
+            margin-left: 12%;
+            margin-right: 12%;
+        }
+        .form-registro form div{
+            display: flex !important;
+            flex-direction: column !important;
+            margin: 2% !important;
+        }
+        .form-registro form div button{
+            margin: 2% !important;
+            text-align: center !important;
+        }
+
+
+ }
+ 
+ /* Large devices (laptops/desktops, 992px and up) */
+ @media only screen and (min-width: 992px) {
+
+        /* CSS DEL MENU */
+
+        .navbar-brand{
+            color: #d9ecf2 !important;
+        }
+        .navbar-toggler{
+            background-color: #d9ecf2 !important;
+            color: #d9ecf2 !important;
+        }
+        .navbar-toggler-icon {
+            color: #1aa6b7 !important;
+        }
+        .nav-link{
+            color: #d9ecf2 !important;
+        }
+        .navbar{
+            background-color: #002d40 !important;
+        }
+        .btn-acceso{
+            background-color: #1aa6b7 !important;
+            width: 100% !important;
+            color: white !important;
+        }
+        .btn-acceso a{
+            color: white !important;
+        }
+        .btn-pedir{
+            background-color: #ff414d !important;
+            color: white !important;
+        }
+        .bi{
+            color:#1aa6b7 ;
+        }
+        .acceso{
+            width: fit-content !important;
+            align-content: space-around !important;
+        }
+        .acceso button{
+            margin: 5% !important;
+        }
+    
+        /* CSS DEL PÁRRAFO DE BIENVENIDA */
+    
+        .bienvenida{
+            text-align: center !important;
+        }
+        .itemIndex-promocion img{
+            width: 100%;
+        }
+    
+        /* CSS DEL LOGIN */
+    
+        .login{
+            margin: 5%;
+        }
+        .login form button{
+            margin: 2% !important;
+        }
+        .btn-link{
+            text-decoration: none !important;
+            list-style: none;
+            color: white !important;
+        }
+    
+        /* CSS DE LAS TARJETAS DE LA CARTA */
+        .itemCarta{
+            display: flex !important;
+            flex-direction: row !important;
+            margin: 2% !important;
+            align-items: center !important
+        }
+        .itemCarta-image img{
+            width: 100% !important;
+        }
+        .itemCarta-content{
+            margin: 2% !important;
+            text-align: left !important
+        }
+    
+        /* CSS DEL REGISTRO */
+    
+        .form-registro form div{
+            display: flex !important;
+            flex-direction: column !important;
+            margin: 2% !important;
+        }
+        .form-registro form div button{
+            margin: 2% !important;
+            text-align: center !important;
+        }
+ }
+ 
+ /* Extra large devices (large laptops and desktops, 1200px and up) */
+ @media only screen and (min-width: 1200px) {
+
+ } 
+
+
