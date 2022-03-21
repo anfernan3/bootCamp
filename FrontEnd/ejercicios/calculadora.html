@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/calculadora.css" />
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>Calculadora</h1>
+      </section>
+      <section class="calculadora">
+        <div>
+          <input type="number" name="pantalla" class="pantalla" />
+        </div>
+        <div>
+          <input type="button" class="btnOperador" value="+" />
+          <input type="button" class="btnOperador" value="-" />
+          <input type="button" class="btnOperador" value="*" />
+          <input type="button" class="btnOperador" value="/" />
+        </div>
+        <div>
+          <input type="button" class="btnNumeros" value="1" />
+          <input type="button" class="btnNumeros" value="2" />
+          <input type="button" class="btnNumeros" value="3" />
+        </div>
+        <div>
+          <input type="button" class="btnNumeros" value="4" />
+          <input type="button" class="btnNumeros" value="5" />
+          <input type="button" class="btnNumeros" value="6" />
+        </div>
+        <div>
+          <input type="button" class="btnNumeros" value="7" />
+          <input type="button" class="btnNumeros" value="8" />
+          <input type="button" class="btnNumeros" value="9" />
+        </div>
+        <div>
+          <input type="button" class="btnNumeros" value="0" />
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPT -->
+    <script src="js/calculadora.js"></script>
+    <script>
+      let calculadora = new Calculadora(document.querySelector(".pantalla"));
+
+      let num1 = document.querySelector(".pantalla").value;
+      let num2 = document.querySelector(".pantalla").value;
+      let operacion;
+
+      // SELECTORES
+      let btnOperador = document.querySelectorAll(".btnOperador");
+      document.querySelectorAll(".btnOperador").forEach((btnOperador) => {
+          btnOperador.addEventListener("click", (ev) =>
+          console.log(ev.target.value)
+          );
+      });
+
+      // PANTALLA
+      let pantalla = document.querySelector(".pantalla").innerHTML;
+
+      // NUMEROS
+      let btnNumeros = document.querySelectorAll(".btnNumeros");
+      document.querySelectorAll(".btnNumeros").forEach((btnNumeros) => {
+        btnNumeros.addEventListener("click", (ev) =>
+          console.log(ev.target.value)
+        );
+      });
+    </script>
+  </body>
+</html>
