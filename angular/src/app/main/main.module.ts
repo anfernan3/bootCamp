@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Optional } from '@angular/core';
+import { SkipSelf } from '@angular/core';
 
 @NgModule({
   declarations: [],

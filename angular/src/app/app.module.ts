@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoggerService, MyCoreModule } from 'src/lib/my-core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainModule } from './main';
+import { SecurityModule } from './security';
 
 @NgModule({
   declarations: [
@@ -10,9 +14,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule, FormsModule,
-    AppRoutingModule, MainModule, SecurityModule, MyCoreModule, 
+    AppRoutingModule, MainModule, SecurityModule, MyCoreModule,
   ],
-  providers: [],
+  providers: [
+    LoggerService,
+    {provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
