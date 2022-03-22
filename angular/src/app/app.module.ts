@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule, FormsModule,
+    AppRoutingModule, MainModule, SecurityModule, MyCoreModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
