@@ -1,6 +1,50 @@
+<h1>Hola {{Nombre | elipsis:20 | uppercase}}</h1>
+
 <p>
-  <input type="button" value="Error" (click)="vm.add('Esto es una notifica
-  ción de error')" >
-  <input type="button" value="Warn" (click)="vm.add('Esta notificación es
-  un aviso', vm.NotificationType.warn)" >
+  <input type="text" [(ngModel)]="Nombre">
+  <input type="button" value="saluda" (click)="saluda()" >
+  <input type="button" value="despide" (click)="despide()" >
+  <input type="button" value="di algo" (click)="di('algo')" >
+  <input type="button" value="cambia" (click)="cambia()" >
+  <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')" >
+  <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso', vm.NotificationType.warn)" >
+</p>
+
+  <p [textContent]="resultado">Esto se pierde</p>
+  <!-- <p [innerHTML] = "resultado">Esto se pierde</p> -->
+
+  <p [hidden]="!visible">Ahora me ves</p>
+  <p [hidden]="visible">Ahora no me ves</p>
+
+  <p [ngClass]="estetica">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis debitis necessitatibus cupiditate et beatae?
+    Veritatis in voluptate, nisi quos accusamus asperiores totam cumque alias pariatur doloribus, tenetur nihil blanditiis
+    perferendis aut et quo? Quas, dicta ea. Fugiat, amet magni ab officia quae optio sint vel eum debitis sunt
+  </p>
+
+  <p [class.semivisible]="!visible">Ahora casi me ves</p>
+
+  <p>
+    Calcula 2 + 2 {{2+2}} = {{calcula(2,2)}}
+  </p>
+
+  <ul>
+    <li *ngFor="let item of listado; let indice=index; let fondo=odd;" [style.background-color]="fondo ? 'Lightblue' : 'Lavender' ">
+      {{item.nombre}} ({{item.id}}) [Elemento {{indice + 1}}] de {{listado.length}}
+    </li>
+  </ul>
+
+  <p>
+    <select [(ngModel)]="idProvincia">
+      <option *ngFor="let item of listado" [value]="item.id">{{item.nombre}}</option>
+    </select>
+    Seleccionado: {{idProvincia}}
+    <input type="text" #txtProvincia value="Tabarnia">
+    <input type="button" value="add" (click)="add(txtProvincia.value)">
+  </p>
+
+  <my-sizer [(size)]="fontSize"></my-sizer>
+
+  <p [style.font-Size.px]="fontSize">
+    {{listado | json}}
   </p>

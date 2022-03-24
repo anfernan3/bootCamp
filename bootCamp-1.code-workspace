@@ -7,5 +7,7 @@
 			"path": "..\\..\\pizzeria"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "bootCamp-1"
+	}
 }
