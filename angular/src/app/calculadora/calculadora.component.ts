@@ -3,52 +3,114 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-calculadora',
   templateUrl: './calculadora.component.html',
-  styleUrls: ['./calculadora.component.css']
+  styleUrls: ['./calculadora.component.css'],
 })
 export class CalculadoraComponent implements OnInit {
+  public displayPreviousValue: string;
+  public displayCurrentValue: string;
+  public operadores: string;
+  public acumulado: number;
+  public operadorPendiente: string;
 
-  constructor() { }
-
-  borrar() {
-    this.valorActual = this.valorActual.toString().slice(0,-1);
-    this.imprimirValores();
-}
-
-borrarTodo() {
-    this.valorActual = '';
-    this.valorAnterior = '';
-    this.tipoOperacion = undefined;
-    this.imprimirValores();
-}
-
-computar(tipo) {
-    this.tipoOperacion !== 'igual' && this.calcular();
-    this.tipoOperacion = tipo;
-    this.valorAnterior = this.valorActual || this.valorAnterior;
-    this.valorActual = '';
-    this.imprimirValores();
-}
-
-agregarNumero(numero) {
-    if(numero === '.' && this.valorActual.includes('.')) return
-    this.valorActual = this.valorActual.toString() + numero.toString();
-    this.imprimirValores();
-}
-
-imprimirValores() {
-    this.displayValorActual.textContent = this.valorActual;
-    this.displayValorAnterior.textContent = `${this.valorAnterior} ${this.signos[this.tipoOperacion] || ''}`;
-}
-
-calcular() {
-    const valorAnterior = parseFloat(this.valorAnterior);
-    const valorActual = parseFloat(this.valorActual);
-
-    if( isNaN(valorActual)  || isNaN(valorAnterior) ) return
-    this.valorActual = this.calculador[this.tipoOperacion](valorAnterior, valorActual);
-}
-
-  ngOnInit(): void {
+  constructor() {
+    this.displayPreviousValue = '';
+    this.displayCurrentValue = '0';
+    this.operadores = '+-*/=';
+    this.acumulado = 0;
+    this.operadorPendiente = '+';
   }
 
+  get ACUMULADO() {
+    return this.acumulado;
+  }
+
+  inicializa() {
+    this.acumulado = 0;
+    this.operadorPendiente = '+';
+  }
+
+  isOperacion(operacion: string) {
+    return this.operadores.indexOf(operacion) != -1;
+  }
+
+  calcula(operando2: string, nuevoOperador: string) {
+    if (!this.isOperacion(nuevoOperador)) {
+      throw new Error('Operación no soportada');
+    }
+
+    switch (this.operadorPendiente) {
+      case '+':
+        this.acumulado += parseFloat(operando2);
+        break;
+      case '-':
+        this.acumulado -= parseFloat(operando2);
+        break;
+      case '*':
+        this.acumulado *= parseFloat(operando2);
+        break;
+      case '/':
+        this.acumulado /= parseFloat(operando2);
+        break;
+      case '=':
+        break;
+    }
+    this.operadorPendiente = nuevoOperador;
+    return this.ACUMULADO;
+  }
+
+  insertarNumero(value: string) {
+    if (this.displayCurrentValue == '0') {
+      this.displayCurrentValue = value;
+    } else {
+      this.displayCurrentValue += value;
+    }
+  }
+
+  mostrarOperador(btn: string) {
+    this.copiarValor();
+    this.valorAnterior(btn);
+    this.deleteCurrentDisplay();
+  }
+
+  valorAnterior(operador: string) {
+    if (operador == '=') {
+      this.displayPreviousValue = this.calcula(
+        this.displayCurrentValue,
+        operador
+      ).toString();
+    } else {
+      this.displayPreviousValue = this.calcula(
+        this.displayCurrentValue,
+        operador
+      ).toString();
+      this.displayPreviousValue += ' ' + operador;
+    }
+  }
+
+  copiarValor() {
+    this.displayPreviousValue = this.displayCurrentValue;
+  }
+
+  borrarUno() {
+    if (this.displayCurrentValue.length == 1) {
+      this.displayCurrentValue = '0';
+    } else {
+      this.displayCurrentValue = this.displayCurrentValue.slice(
+        0,
+        this.displayCurrentValue.length - 1
+      );
+    }
+  }
+
+  borrar() {
+    this.displayCurrentValue = '0';
+    this.displayPreviousValue = '';
+    this.inicializa();
+  }
+
+  deleteCurrentDisplay() {
+    this.displayCurrentValue = '0';
+  }
+
+  ngOnInit(): void {}
 }
