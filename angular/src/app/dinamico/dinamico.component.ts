@@ -12,7 +12,7 @@ import { HomeComponent } from '../main/home/home.component';
 export class DinamicoComponent implements OnInit {
 
   menu=[
-    {texto: 'Formularios', icono: 'fa-brands fa-salesforce', componente: ContactosComponent},
+    {texto: 'Contactos', icono: 'fa-brands fa-salesforce', componente: ContactosComponent},
     {texto: 'Calculadora', icono: 'fa-solid fa-calculator', componente: CalculadoraComponent},
     {texto: 'inicio', icono: 'fa-solid fa-house', componente: HomeComponent},
     {texto: 'demos', icono: 'fa-solid fa-chalkboard-user', componente: DemosComponent},

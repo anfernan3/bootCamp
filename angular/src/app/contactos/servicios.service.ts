@@ -1,10 +1,22 @@
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggerService } from 'src/lib/my-core';
-import { NotificationService } from '../common-services';
-import { ContactosDAOService } from './RESTDAOService';
+import { NotificationService } from '../common-services/notification.service';
+import { RESTDAOService, AUTH_REQUIRED } from './RESTDAOService';
 
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
+
+@Injectable({
+  providedIn: 'root'
+ })
+ export class ContactosDAOService extends RESTDAOService<any, any> {
+  constructor(http: HttpClient) {
+  super(http, 'contactos', {
+  context: new HttpContext().set(AUTH_REQUIRED, true)
+  });
+  }
+ }
 
 @Injectable({
   providedIn: 'root',
@@ -78,8 +90,8 @@ export class ContactosViewModelService {
   public cancel(): void {
     this.elemento = {};
     this.idOriginal = null;
-    // this.list();
-    this.router.navigateByUrl(this.listURL);
+    this.list();
+    // this.router.navigateByUrl(this.listURL);
   }
 
   public send(): void {

@@ -9,13 +9,10 @@ import { CommonServicesModule } from '../common-services';
 
 
 @NgModule({
-  declarations: [
-    CONTACTOS_COMPONENTES
-  ],
+  declarations: [ CONTACTOS_COMPONENTES ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild([]),
     MyCoreModule, CommonServicesModule,
-
   ],
   exports: [ CONTACTOS_COMPONENTES ]
 })

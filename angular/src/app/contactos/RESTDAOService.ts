@@ -29,15 +29,6 @@ export abstract class RESTDAOService<T, K> {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
- })
- export class ContactosDAOService extends RESTDAOService<any, any> {
-  constructor(http: HttpClient) {
-  super(http, 'contactos', {
-  context: new HttpContext().set(AUTH_REQUIRED, true)
-  });
-  }
- }
+
  export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 
