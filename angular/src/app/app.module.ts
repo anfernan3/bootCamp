@@ -15,12 +15,14 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { ContactosModule } from './contactos';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DemosComponent,
     DinamicoComponent,
-    CalculadoraComponent
+    CalculadoraComponent,
+
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

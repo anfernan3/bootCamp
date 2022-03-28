@@ -1,5 +1,9 @@
 <h1>Contacto</h1>
+
+<!-- MOSTRAR ERRORES DEL FORMULARIO -->
+
 <form #miForm="ngForm">
+
   <div class="form-row">
     <div class="form-group col-md-2">
       <label class="form-label" for="id">Código:</label>
@@ -14,13 +18,12 @@
         required
         min="0"
       />
-      <div
-        class="invalid-feedback"
-        [hidden]="!id.hasError('required') || miForm.pristine"
-      >
+      <app-show-error-messages [errors]="id.errors" [pristine]="miForm.pristine"></app-show-error-messages>
+      <!-- <div class="invalid-feedback" [hidden]="!id.hasError('required') || miForm.pristine">
         Es obligatorio
-      </div>
+      </div> -->
     </div>
+
     <div class="form-group col-md-2">
       <label class="form-label" for="tratamiento">Tratamiento:</label>
       <select
@@ -45,7 +48,6 @@
       <label class="form-label" for="nombre">Nombre:</label>
       <input
         class="form-control"
-        [class.is-invalid]="nombre.invalid"
         type="text"
         name="nombre"
         id="nombre"
@@ -55,17 +57,18 @@
         minlength="2"
         maxlength="50"
       />
-      <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
+      <app-show-error-messages [errors]="nombre.errors" [pristine]="miForm.pristine"></app-show-error-messages>
+      <!-- <div class="invalid-feedback" [hidden]="!nombre.hasError('required')">
         Es obligatorio
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="invalid-feedback"
         [hidden]="
           !nombre.hasError('minlength') && !nombre.hasError('maxlength')
         "
       >
         Debe tener entre 2 y 10 letras
-      </div>
+      </div> -->
     </div>
     <div class="form-group col-md-4">
       <label class="form-label" for="apellidos">Apellidos:</label>
@@ -80,14 +83,15 @@
         minlength="2"
         maxlength="50"
       />
-      <div
+      <app-show-error-messages [errors]="apellidos.errors"></app-show-error-messages>
+      <!-- <div
         class="invalid-feedback"
         [hidden]="
           !apellidos.hasError('minlength') && !apellidos.hasError('maxlength')
         "
       >
         Debe tener entre 2 y 10 letras
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="form-row">
@@ -103,6 +107,7 @@
         #telefono="ngModel"
         maxlength="11"
       />
+      <app-show-error-messages [errors]="telefono.errors"></app-show-error-messages>
       <div class="invalid-feedback" [hidden]="!telefono.hasError('maxlength')">
         No debe tener mas de 9 dígitos
       </div>
@@ -120,6 +125,7 @@
         email
         maxlength="100"
       />
+      <app-show-error-messages [errors]="email.errors"></app-show-error-messages>
       <div class="invalid-feedback" [hidden]="email.valid">
         <span [hidden]="!email.hasError('maxlength')"
           >Debe tener menos 100 caracteres.
@@ -139,6 +145,7 @@
         [(ngModel)]="VM.Elemento.nacimiento"
         #nacimiento="ngModel"
       />
+      <app-show-error-messages [errors]="nacimiento.errors"></app-show-error-messages>
     </div>
     <fieldset class="form-group col-md-2">
       <legend class="col-form-label col-sm-2 pt-0">Sexo</legend>
@@ -152,6 +159,7 @@
             value="H"
             [(ngModel)]="VM.Elemento.sexo"
           />
+
           <label class="form-check-label" for="sexo1">Hombre</label>
         </div>
         <div class="form-check">
@@ -197,6 +205,7 @@
         #avatar="ngModel"
         maxlength="500"
       />
+      <app-show-error-messages [errors]="avatar.errors"></app-show-error-messages>
       <div class="invalid-feedback" [hidden]="!avatar.hasError('maxlength')">
         Debe tener menos 500 caracteres.
       </div>
@@ -205,19 +214,6 @@
       </div>
     </div>
   </div>
-  <div class="form-group">
-    <input
-      type="button"
-      class="btn btn-success"
-      value="Enviar"
-      (click)="VM.send()"
-      [disabled]="miForm.invalid"
-    />
-    <input
-      type="button"
-      class="btn btn-info"
-      value="Volver"
-      (click)="VM.cancel()"
-    />
-  </div>
+
+  <app-form-buttons (send)="VM.send()" [send-disabled]="miForm.invalid" (cancel)="VM.cancel()"></app-form-buttons>
 </form>

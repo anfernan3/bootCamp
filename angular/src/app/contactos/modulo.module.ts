@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MyCoreModule } from 'src/lib/my-core';
 import { CONTACTOS_COMPONENTES } from './componente.component';
 import { CommonServicesModule } from '../common-services';
+import { CommonComponentModule } from '../common-component/common-component.module';
 
 
 
@@ -12,7 +13,7 @@ import { CommonServicesModule } from '../common-services';
   declarations: [ CONTACTOS_COMPONENTES ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild([]),
-    MyCoreModule, CommonServicesModule,
+    MyCoreModule, CommonServicesModule, CommonComponentModule,
   ],
   exports: [ CONTACTOS_COMPONENTES ]
 })
