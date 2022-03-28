@@ -12,6 +12,7 @@ import { SecurityModule } from './security';
 import { DemosComponent } from './demos/demos.component';
 import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
+import { ContactosModule } from './contactos';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
   imports: [
     BrowserModule, FormsModule,
     AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
+    ContactosModule,
   ],
   providers: [
     LoggerService,
