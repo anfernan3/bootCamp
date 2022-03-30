@@ -4,13 +4,15 @@ import { Optional } from '@angular/core';
 import { SkipSelf } from '@angular/core';
 import { NotificationComponent } from './notification/notification.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { PageNotFoundComponent } from '.';
 
 
 @NgModule({
   declarations: [
-    NotificationComponent, HomeComponent,
+    NotificationComponent, HomeComponent, HeaderComponent, PageNotFoundComponent,
   ],
-  exports: [NotificationComponent, HomeComponent],
+  exports: [NotificationComponent, HomeComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
   ]
